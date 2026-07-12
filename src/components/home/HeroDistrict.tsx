@@ -80,10 +80,10 @@ export default function HeroDistrict() {
       >
         {/* Layer 02: 遠景の街並み */}
         <div
-          className="motion-safe-only absolute inset-x-0 bottom-[30%] h-[38%]"
+          className="motion-safe-only absolute inset-x-0 bottom-[24%] h-[48%]"
           style={{ transform: "translate(calc(var(--px, 0px) * 0.3), calc(var(--py, 0px) * 0.3))" }}
         >
-          <DistantSkyline className="h-full w-full opacity-70" />
+          <DistantSkyline className="h-full w-full opacity-90" />
         </div>
 
         {/* Layer 03+04: 建築断面（外殻＋5部屋）
@@ -97,13 +97,17 @@ export default function HeroDistrict() {
 
         {/* Layer 07: 巨大ANYWARE立体文字（建物手前・床に立つ。裾は画面外へ切れてよい） */}
         <div
-          className="motion-safe-only absolute inset-x-0 bottom-[-5%] flex justify-center sm:bottom-[-6%]"
+          className="motion-safe-only absolute inset-x-0 bottom-[3%] flex justify-center sm:bottom-[4%]"
           style={{ transform: "translate(calc(var(--px, 0px) * 0.6), calc(var(--py, 0px) * 0.6))" }}
         >
+          <div
+            aria-hidden="true"
+            className="light-glow pointer-events-none absolute left-1/2 top-1/2 h-[60%] w-[70%] -translate-x-1/2 -translate-y-1/2"
+          />
           <ArchitecturalWord
             text="ANYWARE"
             depth={11}
-            className="select-none text-[clamp(3rem,12vw,9.5rem)] leading-[0.86] tracking-[-0.02em]"
+            className="relative select-none text-[clamp(2.6rem,10vw,7.6rem)] leading-[0.86] tracking-[-0.02em]"
           />
         </div>
 

@@ -1,3 +1,7 @@
+"use client";
+
+import { useId } from "react";
+
 const ACCENT_HEX: Record<string, string> = {
   moss: "#526849",
   bronze: "#A47A4E",
@@ -23,52 +27,75 @@ export default function BusinessZoneScene({
 }) {
   const hex = ACCENT_HEX[accent] ?? "#A47A4E";
   const [wallTop, wallBottom] = WALL_GRADIENT[slug] ?? ["#3a3a3c", "#151617"];
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
 
   return (
     <svg viewBox="0 0 1600 1000" className="h-full w-full" role="presentation" aria-hidden="true">
       <defs>
-        <linearGradient id={`wall-${slug}`} x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`wall-${uid}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={wallTop} />
-          <stop offset="100%" stopColor={wallBottom} />
+          <stop offset="55%" stopColor={wallBottom} />
+          <stop offset="100%" stopColor="#080906" />
         </linearGradient>
-        <linearGradient id={`floor-${slug}`} x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`floor-${uid}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#0c0f0c" />
           <stop offset="100%" stopColor="#050605" />
         </linearGradient>
+        <linearGradient id={`reflectionFadeBZ-${uid}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#000" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="1" />
+        </linearGradient>
+        <mask id={`reflectionMask-${uid}`}>
+          <rect x="0" y="720" width="1600" height="280" fill={`url(#reflectionFadeBZ-${uid})`} />
+        </mask>
+        <radialGradient id={`lightPoolBZ-${uid}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#F1B86B" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#F1B86B" stopOpacity="0" />
+        </radialGradient>
       </defs>
 
       {/* 奥の壁 */}
-      <rect x="0" y="0" width="1600" height="720" fill={`url(#wall-${slug})`} />
+      <rect x="0" y="0" width="1600" height="720" fill={`url(#wall-${uid})`} />
       {/* 側壁（奥行き） */}
       <polygon points="0,0 220,60 220,760 0,720" fill="#000" opacity="0.28" />
       <polygon points="1600,0 1380,60 1380,760 1600,720" fill="#000" opacity="0.28" />
       {/* 床 */}
-      <polygon points="0,720 1600,720 1600,1000 0,1000" fill={`url(#floor-${slug})`} />
-      <line x1="0" y1="720" x2="1600" y2="720" stroke="#F1B86B" strokeOpacity="0.18" strokeWidth="2" />
+      <polygon points="0,720 1600,720 1600,1000 0,1000" fill={`url(#floor-${uid})`} />
       {/* 床の奥行きライン */}
       {[300, 700, 1100].map((x) => (
         <line key={x} x1={800} y1="720" x2={x} y2="1000" stroke="#F5F0E5" strokeOpacity="0.04" strokeWidth="1" />
       ))}
 
-      {/* 天井の照明 */}
+      {/* 天井の照明と光だまり */}
       {[220, 560, 900, 1240, 1420].map((x, i) => (
-        <rect
-          key={x}
-          x={x}
-          y="36"
-          width="56"
-          height="16"
-          rx="3"
-          fill="#F1B86B"
-          className="motion-safe-only animate-shimmer"
-          style={{ animationDelay: `${i * 0.35}s` }}
-        />
+        <g key={x}>
+          <rect
+            x={x}
+            y="36"
+            width="56"
+            height="16"
+            rx="3"
+            fill="#F1B86B"
+            className="motion-safe-only animate-shimmer"
+            style={{ animationDelay: `${i * 0.35}s` }}
+          />
+          <ellipse cx={x + 28} cy="140" rx="90" ry="120" fill={`url(#lightPoolBZ-${uid})`} opacity="0.4" />
+        </g>
       ))}
+
+      {/* 床の反射（什器の逆さ像） */}
+      <g mask={`url(#reflectionMask-${uid})`} opacity="0.4">
+        <g transform="translate(0,1440) scale(1,-1)">
+          <RoomProps slug={slug} accent={hex} />
+        </g>
+      </g>
+      <line x1="0" y1="720" x2="1600" y2="720" stroke="#F1B86B" strokeOpacity="0.3" strokeWidth="2" />
 
       <RoomProps slug={slug} accent={hex} />
 
       {/* ガラス反射帯 */}
-      <polygon points="60,1000 640,120 760,120 220,1000" fill="#F5F0E5" opacity="0.045" style={{ mixBlendMode: "screen" }} />
+      <polygon points="60,1000 640,120 760,120 220,1000" fill="#F5F0E5" opacity="0.05" style={{ mixBlendMode: "screen" }} />
+      <polygon points="900,1000 1180,260 1280,260 1080,1000" fill="#F5F0E5" opacity="0.03" style={{ mixBlendMode: "screen" }} />
     </svg>
   );
 }
