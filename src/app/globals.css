@@ -149,6 +149,60 @@ body {
   scrollbar-width: none;
 }
 
+/* --- ヒーロー実写ビジュアル用レイヤー --- */
+.hero-reflection {
+  background: linear-gradient(
+    115deg,
+    transparent 34%,
+    rgba(245, 240, 229, 0.1) 47%,
+    rgba(245, 240, 229, 0.03) 53%,
+    transparent 66%
+  );
+  background-size: 260% 260%;
+  mix-blend-mode: screen;
+  animation: hero-sheen 16s ease-in-out infinite;
+}
+
+@keyframes hero-sheen {
+  0%,
+  100% {
+    background-position: 15% 10%;
+  }
+  50% {
+    background-position: 85% 90%;
+  }
+}
+
+@keyframes hero-particle {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  88% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(8px, -70px);
+    opacity: 0;
+  }
+}
+
+.animate-hero-particle {
+  animation-name: hero-particle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reflection {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
 /* --- 建築空間の質感ユーティリティ --- */
 
 /* ガラス面の反射（斜めのハイライト帯） */

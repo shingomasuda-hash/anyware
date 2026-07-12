@@ -1,19 +1,22 @@
 # IMAGE GENERATION PROMPTS — 画像差し替えガイド
 
-現状、サイト内のすべてのビジュアルは **CSS / SVG（コード生成）による仮素材**です。
+ホームのファーストビュー（PC/SP）は、クライアントから支給された実写品質のメインビジュアル
+（`public/images/hero/hero-pc.webp`, `public/images/hero/hero-mobile.webp`）を採用済みです。
+それ以外のビジュアルは引き続き **CSS / SVG（コード生成）による仮素材**です。
 権利関係が確認できる実写素材が用意でき次第、以下の一覧に従って差し替えてください。
 すべての画像は「同一の建築・照明・素材・時間帯（夕方〜夜への移行直前）・カメラレンズの
-ルール」で統一すると、指示書のトンマナ（建築模型／映画のセット／高級ホテル内装／
-美術館の展示空間）に合った一貫性が生まれます。
+ルール」で統一すると、ヒーロー画像のトンマナ（建築断面／暖色照明／巨大立体文字）に
+合った一貫性が生まれます。
 
 差し替え時は `next/image` の使用、WebP/AVIF形式、`alt`属性の付与を必須とします。
 
-## 優先度A：ファーストビュー
+## 優先度A：ファーストビュー（対応済み）
 
-| # | 用途 | 現在の実装 | 推奨サイズ/比率 | 生成プロンプト（例） |
+| # | 用途 | 現在の実装 | サイズ | 備考 |
 |---|---|---|---|---|
-| 1 | ホーム ヒーロー背景（建築断面全景） | `DistrictIllustration.tsx`（SVG） | 2400×1600px（3:2） | "Architectural cross-section diorama of a warm, boutique creative company building at dusk, five connected rooms visible from outside, soft interior lighting, rounded modern architecture, miniature model photography style, warm amber and deep green color palette, cinematic lighting, high detail, no text, no logos" |
-| 2 | OGP画像 | `src/app/og/route.tsx`（next/og動的生成） | 1200×630px | 現状のまま運用可。差し替える場合は同トーンで作成 |
+| 1 | ホーム ヒーロー背景 PC | `public/images/hero/hero-pc.webp`（`HeroDistrict.tsx`） | 1586×992px | クライアント支給の本番画像。767px超で表示 |
+| 1' | ホーム ヒーロー背景 SP | `public/images/hero/hero-mobile.webp`（`HeroDistrict.tsx`） | 941×1672px | クライアント支給の本番画像。767px以下で表示（PC画像の縮小ではなく別カット） |
+| 2 | OGP画像 | `src/app/og/route.tsx`（next/og動的生成） | 1200×630px | 上記ヒーロー画像を用いた静的OG画像に差し替えると統一感が増す（任意） |
 
 ## 優先度B：事業ゾーン（5点、`BusinessZoneScene.tsx` を差し替え）
 
