@@ -3,20 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --color-ink: #171817;
-  --color-charcoal: #242522;
-  --color-bone: #f1ebdd;
-  --color-warm-white: #faf7f0;
-  --color-moss: #526348;
-  --color-deep-green: #253a2b;
-  --color-bronze: #9a714a;
-  --color-clay: #a76445;
-  --color-water: #9ebcb5;
-  --color-line: rgba(23, 24, 23, 0.16);
+  --color-ink: #171915;
+  --color-charcoal: #232620;
+  --color-night-green: #101611;
+  --color-deep-green: #202b22;
+  --color-bone: #dfd5c2;
+  --color-warm-white: #f5f0e5;
+  --color-wood: #8b5e3c;
+  --color-bronze: #a47a4e;
+  --color-moss: #526849;
+  --color-leaf: #789366;
+  --color-water: #9cbdb5;
+  --color-clay: #b56f4b;
+  --color-amber-light: #f1b86b;
+  --color-line: rgba(23, 25, 21, 0.14);
+  --color-line-light: rgba(245, 240, 229, 0.16);
 
   --header-height: clamp(64px, 8vw, 84px);
   --page-gutter: clamp(20px, 5vw, 64px);
   --ease-district: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-camera: cubic-bezier(0.22, 0.61, 0.16, 1);
 }
 
 * {
@@ -141,4 +147,83 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* --- 建築空間の質感ユーティリティ --- */
+
+/* ガラス面の反射（斜めのハイライト帯） */
+.surface-glass {
+  position: relative;
+  overflow: hidden;
+}
+.surface-glass::before {
+  content: "";
+  position: absolute;
+  inset: -20% -20%;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(245, 240, 229, 0.14) 48%,
+    rgba(245, 240, 229, 0.03) 54%,
+    transparent 62%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* 中央に視線を集めるビネット */
+.surface-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 55%,
+    transparent 35%,
+    rgba(16, 22, 17, 0.55) 100%
+  );
+}
+
+/* 案内板・サインのようなCTA */
+.sign-plate {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid rgba(245, 240, 229, 0.4);
+  background: linear-gradient(180deg, rgba(35, 38, 32, 0.55), rgba(16, 22, 17, 0.75));
+  backdrop-filter: blur(2px);
+  box-shadow: inset 0 1px 0 rgba(245, 240, 229, 0.12), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.sign-plate:hover {
+  border-color: rgba(241, 184, 107, 0.75);
+  box-shadow: inset 0 1px 0 rgba(245, 240, 229, 0.2), 0 0 0 1px rgba(241, 184, 107, 0.25),
+    0 10px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* 暖色の光だまり（照明の気配） */
+.light-glow {
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(241, 184, 107, 0.55) 0%, rgba(241, 184, 107, 0) 70%);
+  filter: blur(2px);
+}
+
+/* 微細な木目 */
+.texture-wood {
+  background-image: repeating-linear-gradient(
+    92deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 3px,
+    transparent 9px
+  );
+}
+
+/* 上下をフェードさせて次のセクションへ溶け込ませる */
+.fade-mask-b {
+  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+}
+.fade-mask-t {
+  mask-image: linear-gradient(to top, black 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 78%, transparent 100%);
 }

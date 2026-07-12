@@ -9,8 +9,8 @@ type ArchitecturalWordProps = {
 export default function ArchitecturalWord({
   text,
   depth = 14,
-  faceColor = "#f1ebdd",
-  sideColor = "#9a714a",
+  faceColor = "#F5F0E5",
+  sideColor = "#A47A4E",
   className,
 }: ArchitecturalWordProps) {
   const shadows = Array.from({ length: depth })
@@ -22,7 +22,9 @@ export default function ArchitecturalWord({
       className={`type-display block select-none ${className ?? ""}`}
       style={{
         color: faceColor,
-        textShadow: `${shadows}, ${depth + 4}px ${depth + 6}px 24px rgba(0,0,0,0.35)`,
+        textShadow: `-1px -1px 0 rgba(241,184,107,0.55), ${shadows}, ${depth + 6}px ${
+          depth + 10
+        }px 30px rgba(0,0,0,0.5)`,
       }}
       aria-hidden="true"
     >

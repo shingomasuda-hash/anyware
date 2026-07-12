@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { primaryNav, contactNav } from "@/data/navigation";
 import { businesses } from "@/data/businesses";
+import DistrictIllustration from "@/components/home/DistrictIllustration";
 
 type MobileMenuProps = {
   open: boolean;
@@ -51,13 +52,19 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label="サイトメニュー"
-      className={`fixed inset-0 z-[60] flex flex-col bg-ink text-warm-white transition-opacity duration-500 ${
+      aria-label="サイトメニュー（建物案内図）"
+      className={`fixed inset-0 z-[60] flex flex-col overflow-hidden bg-night-green text-warm-white transition-opacity duration-500 ${
         open ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
+      {/* 背景の建物案内図 */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[50%] opacity-[0.14]">
+        <DistrictIllustration className="h-full w-full" />
+      </div>
+      <div className="surface-vignette" />
+
       <div
-        className="flex items-center justify-between"
+        className="relative flex items-center justify-between"
         style={{ height: "var(--header-height)", paddingInline: "var(--page-gutter)" }}
       >
         <span className="type-display text-lg">{siteBrand}</span>
@@ -65,10 +72,10 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
           ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          className="type-label flex items-center gap-2 text-[11px]"
+          className="sign-plate type-label flex items-center gap-2 rounded-sm px-4 py-2 text-[11px]"
         >
           CLOSE
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-current">
+          <span className="relative flex h-6 w-6 items-center justify-center">
             <span className="absolute h-[1.5px] w-3.5 rotate-45 bg-current" />
             <span className="absolute h-[1.5px] w-3.5 -rotate-45 bg-current" />
           </span>
@@ -77,7 +84,7 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
 
       <nav
         aria-label="サイトの区画一覧"
-        className="flex flex-1 flex-col justify-center gap-1 overflow-y-auto"
+        className="relative flex flex-1 flex-col justify-center gap-1 overflow-y-auto"
         style={{ paddingInline: "var(--page-gutter)" }}
       >
         {primaryNav.map((item) => (
@@ -85,9 +92,9 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
             key={item.href}
             href={item.href}
             onClick={onClose}
-            className="group flex items-baseline justify-between border-b border-warm-white/15 py-4 sm:py-5"
+            className="group flex items-baseline justify-between border-b border-line-light py-4 sm:py-5"
           >
-            <span className="type-display text-[clamp(1.8rem,7vw,3.5rem)] transition-transform duration-300 group-hover:translate-x-2">
+            <span className="type-display text-[clamp(1.8rem,7vw,3.5rem)] transition-colors duration-300 group-hover:text-amber-light">
               {item.label}
             </span>
             <span className="type-jp-body text-sm text-warm-white/50">
@@ -98,11 +105,11 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
       </nav>
 
       <div
-        className="border-t border-warm-white/15 py-6"
+        className="relative border-t border-line-light py-6"
         style={{ paddingInline: "var(--page-gutter)" }}
       >
         <p className="type-label mb-4 text-[10px] text-warm-white/40">
-          THE UPDATE DISTRICT — 5 ZONES
+          THE ANYWARE HOUSE — 5 ROOMS
         </p>
         <ul className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-5">
           {businesses.map((b) => (
@@ -110,7 +117,7 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
               <Link
                 href={`/business/${b.slug}`}
                 onClick={onClose}
-                className="type-label block text-[11px] text-warm-white/70 hover:text-warm-white"
+                className="type-label block text-[11px] text-warm-white/70 hover:text-amber-light"
               >
                 {b.code} {b.zoneName}
               </Link>
@@ -120,7 +127,7 @@ export default function MobileMenu({ open, onClose, siteBrand }: MobileMenuProps
         <Link
           href={contactNav.href}
           onClick={onClose}
-          className="type-label mt-6 inline-flex rounded-full border border-warm-white px-6 py-3 text-[11px] hover:bg-warm-white hover:text-ink"
+          className="sign-plate type-label mt-6 inline-flex rounded-sm px-6 py-3 text-[11px]"
         >
           {contactNav.label}
         </Link>

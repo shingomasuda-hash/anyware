@@ -69,16 +69,18 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="type-label text-[11px] transition-opacity hover:opacity-60"
+                className={`type-label text-[11px] transition-colors ${
+                  transparent ? "hover:text-amber-light" : "hover:text-clay"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href={contactNav.href}
-              className={`type-label rounded-full border px-5 py-2 text-[11px] transition-colors ${
+              className={`type-label rounded-sm border px-5 py-2.5 text-[11px] transition-colors ${
                 transparent
-                  ? "border-warm-white text-warm-white hover:bg-warm-white hover:text-ink"
+                  ? "border-amber-light/70 text-warm-white hover:bg-amber-light hover:text-ink"
                   : "border-ink text-ink hover:bg-ink hover:text-warm-white"
               }`}
             >

@@ -24,14 +24,14 @@ export const businesses: Business[] = [
   {
     slug: "regional",
     code: "01",
-    zoneName: "TOWN",
+    zoneName: "TOWN COMMONS",
     nameJp: "地域創生・地域共創",
     nameEn: "REGIONAL CO-CREATION",
     catchJp: "地域にある人、企業、文化、場所をつなぎ、新しい事業と人の流れをつくる。",
     leadJp:
       "地域にはすでに価値があります。足りないのは、それを見つけ、つなぎ、動かす仕組みです。AnyWareは地域の人・企業・場所のあいだに立ち、新しい経済の流れを設計します。",
     accent: "moss",
-    enterCta: "ENTER TOWN",
+    enterCta: "ENTER THE COMMONS",
     elements: [
       "地域資源の発掘",
       "事業開発",
@@ -148,14 +148,14 @@ export const businesses: Business[] = [
   {
     slug: "partner",
     code: "03",
-    zoneName: "WITH",
+    zoneName: "PARTNER ROOM",
     nameJp: "事業伴走・コンサルティング",
     nameEn: "BUSINESS PARTNERING",
     catchJp: "外から答えを渡すのではなく、同じテーブルで考え、実行し、改善する。",
     leadJp:
       "経営者が一人で抱える課題は多くあります。AnyWareは同じテーブルにつき、戦略から実行、検証、改善までを継続的に伴走します。",
     accent: "charcoal",
-    enterCta: "JOIN THE TABLE",
+    enterCta: "MEET AT THE TABLE",
     elements: [
       "事業課題の整理",
       "経営者への伴走",
@@ -211,14 +211,14 @@ export const businesses: Business[] = [
   {
     slug: "food",
     code: "04",
-    zoneName: "TABLE",
+    zoneName: "TABLE & KITCHEN",
     nameJp: "飲食店事業・飲食店支援",
     nameEn: "FOOD & RESTAURANT",
     catchJp: "食を、地域の体験と人が集まるきっかけにする。",
     leadJp:
       "AnyWareは飲食店の支援だけでなく、自ら店舗を運営する当事者でもあります。現場で得た知見をもとに、立ち上げから日々の運営改善まで伴走します。",
     accent: "clay",
-    enterCta: "ENTER THE KITCHEN",
+    enterCta: "STEP INTO THE KITCHEN",
     elements: [
       "飲食店の立ち上げ",
       "店舗運営",
@@ -277,14 +277,14 @@ export const businesses: Business[] = [
   {
     slug: "hydroponics",
     code: "05",
-    zoneName: "GROW",
+    zoneName: "GREEN LAB",
     nameJp: "水耕栽培事業",
     nameEn: "HYDROPONICS",
     catchJp: "育てる仕組みから、地域の新しい産業と循環をつくる。",
     leadJp:
       "水耕栽培は、AnyWareにとって「育てる」ことそのものを事業にする取り組みです。地域や企業と連携しながら、食と地域をつなぐ新しい循環をつくります。",
     accent: "water",
-    enterCta: "SEE HOW WE GROW",
+    enterCta: "EXPLORE THE GREEN LAB",
     elements: [
       "水耕栽培設備・仕組みの展開",
       "地域や企業との連携",
